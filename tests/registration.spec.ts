@@ -16,8 +16,8 @@ test('Successful Data Driven Registration', async ({ page }) => {
     await page.goto('#/signup');
     const registration = new RegistrationPage(page);
   
-    const firstName = faker.name.firstName();
-    const lastName = faker.name.lastName();
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
     // Generate email with custom domain
     const email = `${faker.internet.userName()}@domain.com`; 
     const password = faker.internet.password(10) + 'A@'; 

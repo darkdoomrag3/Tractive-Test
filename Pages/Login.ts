@@ -41,11 +41,16 @@ export class LoginPage {
   }
 
   async acceptCookie() {
-    await this.cookieDialog.waitFor({ state: "visible" });
-    await this.acceptAllButton.waitFor({ state: "visible" });
-    await this.acceptAllButton.click();
+    const isDialogVisible = await this.cookieDialog.isVisible();
+    
+    if (isDialogVisible) {
+      const isButtonVisible = await this.acceptAllButton.isVisible();
+      if (isButtonVisible) {
+        await this.acceptAllButton.click();
+      }
+    }
   }
-
+  
   async signOut() {
     await this.signOutButton.click();
     await this.signOutInDialogButton.click();

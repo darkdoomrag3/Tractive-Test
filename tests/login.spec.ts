@@ -16,7 +16,6 @@ test('Successful Login', async ({ page }) => {
   const login = new LoginPage(page);
   await login.successFullLoginForm('emaddeym@gmail.com','Emad@40304030');
   await login.signIn();
-  // await login.acceptCookie();
   await login.signOut();
 });
 
