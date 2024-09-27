@@ -3,7 +3,7 @@
 Welcome to the Tractive E2E Test project! This repository is dedicated to end-to-end (E2E) tests implemented using Playwright. Our goal is to ensure the quality and reliability of the application by automating user interactions across various browsers.
 
 ## Project Description
-Tractive E2E Test suite is designed to simulate user actions and validate the behavior of the Login and Registration of Tractive web application. By covering critical user flows, we aim to catch regressions and ensure that new features work as expected before they reach production.
+Tractive E2E Test suite is designed to simulate user actions and validate the behavior of the Login and Registration of Tractive web application. By covering critical user flows, we aim to catch regressions and ensure that new features work as expected before they reach production. For Data Drriven testing we are using [faker-js](https://fakerjs.dev/api/) 
 
 
 

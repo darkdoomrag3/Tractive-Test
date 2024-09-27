@@ -24,13 +24,31 @@ export class RegistrationPage {
   }
 
   async fillCreateAccountForm(firstName: string,lastName:string,email:string,password:string) {
+    await this.assertInputVisibility(); // Ensure inputs are visible
     await this.firstNameInput.fill(firstName);
     await this.lastNamelInput.fill(lastName);
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
   }
 
+
+  async assertInputVisibility() {
+    await expect(this.firstNameInput).toBeVisible();
+    await expect(this.firstNameInput).toBeEnabled();
+
+    await expect(this.lastNamelInput).toBeVisible();
+    await expect(this.lastNamelInput).toBeEnabled();
+
+    await expect(this.emailInput).toBeVisible();
+    await expect(this.emailInput).toBeEnabled();
+
+    await expect(this.passwordInput).toBeVisible();
+    await expect(this.passwordInput).toBeEnabled();
+  }
+
+  
   async createAccountButton() {
+    await expect(this.createAccountLocator).toBeVisible();
     await this.createAccountLocator.click();
  
   }
@@ -43,7 +61,7 @@ async createAccountButtonValidation(){
 async validateErrorMessage(expectedText: string) {
 
   const validationMessages = this.page.getByText(expectedText);
-  // Count the number of matching elements
+  // Count the number of matching elements for multiple input error validation
   const count = await validationMessages.count();
 
 
@@ -54,6 +72,7 @@ async validateErrorMessage(expectedText: string) {
 }
 
 async newsLetterCheckbox(){
+  await expect(this.newsLetterCheckboxLocator).toBeVisible();
   await this.newsLetterCheckboxLocator.click();
 }
 

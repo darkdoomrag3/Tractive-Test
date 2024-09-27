@@ -8,8 +8,6 @@ export class LoginPage {
   readonly singInButton: Locator;
   readonly signOutButton: Locator;
   readonly signOutInDialogButton: Locator;
-  readonly cookieDialog: Locator;
-  readonly acceptAllButton: Locator;
   readonly forgotPasswordLink: Locator;
   readonly signInWithAppleLocator: Locator;
   readonly signInWithGoogleLocator: Locator;
@@ -23,33 +21,25 @@ export class LoginPage {
     this.singInButton = page.locator('button[type="submit"]', { hasText: "Sign In" });
     this.signOutButton = page.getByText("Sign Out").nth(1);
     this.signOutInDialogButton = page.getByRole("button", { name: "Sign Out" });
-    this.cookieDialog = page.locator("dialog.content");
-    this.acceptAllButton = page.locator("button.js-cookie-consent-accept");
     this.forgotPasswordLink = page.getByText('Forgot password?');
     this.createAccountLink = page.getByText('Create Account');
     this.signInWithAppleLocator = page.getByRole('button', { name: 'Sign in with Apple' });
-    this.signInWithGoogleLocator = page.getByRole('button', { name: 'Sign in with Google' });
+    this.signInWithGoogleLocator = page.frameLocator('iframe[title="Sign in with Google Button"]').getByLabel('Sign in with Google')
   }
 
   async successFullLoginForm(email: string, password: string) {
+    await expect(this.emailInput).toBeVisible();
+    await expect(this.passwordlInput).toBeVisible();
     await this.emailInput.fill(email);
     await this.passwordlInput.fill(password);
   }
 
   async signIn() {
+    await expect(this.singInButton).toBeVisible();
+    await expect(this.singInButton).toBeEnabled();
     await this.singInButton.click();
   }
 
-  async acceptCookie() {
-    const isDialogVisible = await this.cookieDialog.isVisible();
-    
-    if (isDialogVisible) {
-      const isButtonVisible = await this.acceptAllButton.isVisible();
-      if (isButtonVisible) {
-        await this.acceptAllButton.click();
-      }
-    }
-  }
   
   async signOut() {
     await this.signOutButton.click();
@@ -98,6 +88,9 @@ export class LoginPage {
   }
 
   async signInWithGoogle() {
+   
+    await expect(this.signInWithGoogleLocator).toBeVisible({ timeout: 30000 });
+
     if (!this.context) {
       throw new Error('Browser context is required for this operation.');
     }
