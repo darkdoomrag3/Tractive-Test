@@ -2,15 +2,18 @@ import { test, expect } from "@playwright/test";
 import { LoginPage } from "../Pages/Login";
 import { faker } from "@faker-js/faker";
 
+
+
 test.describe("Login Tests", () => {
 
   test.beforeEach(async ({ context, page }) => {
-    await context.addCookies([
+ 
+    await context.  addCookies([
       {
         name: "interview",
-        value: "7lBPV9iik6r9MNE5dKw9nzF9CstdlEJl",
+        value: process.env.COOKIES_VALUE,
         path: "/",
-        domain: ".tractive.com",
+        domain: process.env.COOKIES_DOMAIN,
       },
     ]);
     await page.goto("/");
